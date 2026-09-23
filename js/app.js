@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbwMfTEEJdSoSa0gRFgeb-LB78_00MVPOj8aMVXe9w-5HahqkpM1WIoPwRsRvfaQiflMJw/exec';
+const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbyt0Z3-WRVkULQlNqqxWqqD4UiUx_YXWLRhlYH18axQmYYe9VHF6vQ1y8LCTclY2T66OQ/exec';
 const SPREADSHEET_ID = '1ymPQESDrB_NuZpUMDU2R40tmaCoxJSoXkJHrpJmOaEM';
 let records = [];
 let occupancy = 0;
