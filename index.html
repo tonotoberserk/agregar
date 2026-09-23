@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Control de Entradas, Salidas y Aforo en Tiempo Real">
+<title>Control de Aforo - El Salvador</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="loading-indicator" style="display:none;text-align:center;padding:20px;color:var(--text-light)">
+      <p>Cargando registros desde Google Sheets...</p>
+    </div>
+    <header>
+      <div class="header-left">
+        <h1>Control de Aforo</h1>
+        <span class="time-display" id="current-time"></span>
+      </div>
+      <div class="header-right">
+        <div class="current-shift" id="current-shift-label"></div>
+        <button class="btn-stats" id="btn-stats" title="Estadísticas">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        </button>
+        <div class="dropdown" id="stats-dropdown">
+          <div class="dropdown-header">
+            <h3>Estadísticas</h3>
+            <button class="btn-close-dropdown" id="close-dropdown">&times;</button>
+          </div>
+          <div class="dropdown-content">
+            <div class="stat-section">
+              <h4>Turno Matutino (08:00 - 12:00)</h4>
+              <p>Entradas: <span id="stat-morning-in">0</span></p>
+              <p>Salidas: <span id="stat-morning-out">0</span></p>
+              <p>Neto: <span id="stat-morning-net">0</span></p>
+            </div>
+            <div class="stat-section">
+              <h4>Turno Vespertino (13:00 - 19:00)</h4>
+              <p>Entradas: <span id="stat-evening-in">0</span></p>
+              <p>Salidas: <span id="stat-evening-out">0</span></p>
+              <p>Neto: <span id="stat-evening-net">0</span></p>
+            </div>
+            <div class="stat-section">
+              <h4>Fuera de Horario</h4>
+              <p>Entradas: <span id="stat-night-in">0</span></p>
+              <p>Salidas: <span id="stat-night-out">0</span></p>
+              <p>Neto: <span id="stat-night-net">0</span></p>
+            </div>
+            <hr>
+            <div class="stat-section">
+              <h4>Totales Generales</h4>
+              <p>Total Entradas: <span id="stat-total-in">0</span></p>
+              <p>Total Salidas: <span id="stat-total-out">0</span></p>
+              <p>Registros: <span id="stat-total-records">0</span></p>
+            </div>
+            <hr>
+            <div class="stat-section">
+              <h4>Exportar / Importar</h4>
+              <button class="btn-export" id="btn-export-excel">📥 Exportar Excel</button>
+              <button class="btn-import" id="btn-import-excel">📤 Importar Excel</button>
+              <input type="file" id="import-file" accept=".xlsx,.xls" style="display:none;">
+              <button class="btn-reset" id="btn-reset-data">🗑️ Resetear Datos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="occupancy-display">
+        <div class="occupancy-circle" id="occupancy-circle">
+          <span class="occupancy-number" id="occupancy-number">0</span>
+          <span class="occupancy-label">Personas</span>
+        </div>
+        <div class="occupancy-bar-container">
+          <div class="occupancy-bar" id="occupancy-bar"></div>
+        </div>
+        <p class="occupancy-text" id="occupancy-text">Aforo actual: 0 personas</p>
+      </div>
+
+      <div class="buttons-container">
+        <button class="btn-entry" id="btn-entry">
+          <span class="btn-icon">➕</span>
+          <span class="btn-text">ENTRADA</span>
+        </button>
+        <button class="btn-exit" id="btn-exit">
+          <span class="btn-icon">➖</span>
+          <span class="btn-text">SALIDA</span>
+        </button>
+      </div>
+
+      <div class="recent-records" id="recent-records">
+        <h3>Últimos Registros</h3>
+        <ul id="records-list"></ul>
+      </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
